@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+<title>Browse - Cyborg</title>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-area header-sticky">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <nav class="main-nav">
+                  <a href="{% url 'home' %}" class="logo">
+                      <img src="{% static 'assets/images/logo.png' %}" alt="">
+                  </a>
+                  <ul class="nav">
+                      <li><a href="{% url 'home' %}">Home</a></li>
+                      <li><a href="{% url 'browse' %}" class="active">Browse</a></li>
+                      <li><a href="{% url 'details' %}">Details</a></li>
+                      <li><a href="{% url 'streams' %}">Streams</a></li>
+                      <li><a href="{% url 'profile' %}">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+                  </ul>   
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+              </nav>
+          </div>
+      </div>
+  </div>
+</header>
+
+<!-- Main content -->
+<div class="container mt-5">
+  <h2 class="text-white">Browse Games</h2>
+  <div class="row">
+    {% for game in games %}
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="{% static game.image %}" class="card-img-top" alt="{{ game.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ game.title }}</h5>
+          <p class="card-text">{{ game.genre }}</p>
+          <a href="#" class="btn btn-primary">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>No games available.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-lg-12 text-center text-muted">
+        <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+        <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>

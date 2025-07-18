@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<title>Cyborg - Profile</title>
+
+<link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/templatemo-cyborg-gaming.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/owl.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/animate.css' %}">
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+</head>
+
+<body>
+
+<div id="js-preloader" class="js-preloader">
+  <div class="preloader-inner">
+    <span class="dot"></span>
+    <div class="dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<header class="header-area header-sticky">
+  <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <nav class="main-nav">
+                  <a href="{% url 'home' %}" class="logo">
+                      <img src="{% static 'assets/images/logo.png' %}" alt="">
+                  </a>
+                  <div class="search-input">
+                    <form id="search" action="#">
+                      <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" />
+                      <i class="fa fa-search"></i>
+                    </form>
+                  </div>
+                  <ul class="nav">
+                      <li><a href="{% url 'home' %}">Home</a></li>
+                      <li><a href="{% url 'browse' %}">Browse</a></li>
+                      <li><a href="{% url 'details' %}">Details</a></li>
+                      <li><a href="{% url 'streams' %}">Streams</a></li>
+                      <li><a href="{% url 'profile' %}" class="active">Profile <img src="{% static 'assets/images/profile-header.jpg' %}" alt=""></a></li>
+                  </ul>   
+                  <a class='menu-trigger'>
+                      <span>Menu</span>
+                  </a>
+              </nav>
+          </div>
+      </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-content">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-profile">
+              <div class="row">
+                <div class="col-lg-4">
+                  <img src="{% static 'assets/images/profile.jpg' %}" alt="" style="border-radius: 23px;">
+                </div>
+                <div class="col-lg-4 align-self-center">
+                  <div class="main-info header-text">
+                    <span>Offline</span>
+                    <h4>{{ user_name }}</h4>
+                    <p>You Haven't Gone Live yet. Go Live By Touching The Button Below.</p>
+                    <div class="main-border-button">
+                      <a href="#">Start Live Stream</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 align-self-center">
+                  <ul>
+                    <li>Games Downloaded <span>{{ stats.games_downloaded }}</span></li>
+                    <li>Friends Online <span>{{ stats.friends_online }}</span></li>
+                    <li>Live Streams <span>{{ stats.live_streams }}</span></li>
+                    <li>Clips <span>{{ stats.clips }}</span></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="clips">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="heading-section">
+                          <h4><em>Your Most Popular</em> Clips</h4>
+                        </div>
+                      </div>
+
+                      {% for clip in clips %}
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="item">
+                          <div class="thumb">
+                            <img src="{% static clip.image %}" alt="" style="border-radius: 23px;">
+                            <a href="{{ clip.link }}" target="_blank"><i class="fa fa-play"></i></a>
+                          </div>
+                          <div class="down-content">
+                            <h4>{{ clip.title }}</h4>
+                            <span><i class="fa fa-eye"></i> {{ clip.views }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+
+                      <div class="col-lg-12">
+                        <div class="main-button">
+                          <a href="#">Load More Clips</a>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="gaming-library profile-library">
+          <div class="col-lg-12">
+            <div class="heading-section">
+              <h4><em>Your Gaming</em> Library</h4>
+            </div>
+
+            {% for game in games %}
+            <div class="item {% if forloop.last %}last-item{% endif %}">
+              <ul>
+                <li><img src="{% static game.image %}" alt="" class="templatemo-item"></li>
+                <li><h4>{{ game.title }}</h4><span>{{ game.genre }}</span></li>
+                <li><h4>Date Added</h4><span>{{ game.date_added }}</span></li>
+                <li><h4>Hours Played</h4><span>{{ game.hours_played }}</span></li>
+                <li><h4>Currently</h4><span>{{ game.status }}</span></li>
+                <li><div class="main-border-button border-no-active"><a href="#">Downloaded</a></div></li>
+              </ul>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <p>Copyright © 2036 <a href="#">Cyborg Gaming</a> Company. All rights reserved.
+        <br>Design: <a href="https://templatemo.com" target="_blank" title="free CSS templates">TemplateMo</a></p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/isotope.min.js' %}"></script>
+<script src="{% static 'assets/js/owl-carousel.js' %}"></script>
+<script src="{% static 'assets/js/tabs.js' %}"></script>
+<script src="{% static 'assets/js/popup.js' %}"></script>
+<script src="{% static 'assets/js/custom.js' %}"></script>
+
+</body>
+
+</html>
